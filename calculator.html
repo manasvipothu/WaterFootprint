@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Footprint Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: aliceblue;
+            background: url(https://images.wallpaperscraft.com/image/single/jellyfish_abstract_space_113599_1920x1080.jpg);
+            /* background: linear-gradient(rgb(110, 31, 236), rgb(45, 92, 223), rgb(110, 188, 240)) */
+            
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #waterUsageChart {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+
+<body>
+    
+    
+
+    <div class="container">
+        <h2>Water Footprint Calculator</h2>
+        <label for="familyMembers">Number of Family Members:</label>
+        <input type="number" id="familyMembers" min="1" step="1" value="1" onchange="showVegetarianInputs()">
+        <div id="vegetarianInput" style="display: none;">
+            <label for="vegetarianMembers">Number of Vegetarian Family Members:</label>
+            <input type="number" id="vegetarianMembers" min="0" step="1" value="0">
+        </div>
+        <div id="nonVegetarianInput" style="display: none;">
+            <label for="nonVegetarianMembers">Number of Non-Vegetarian Family Members:</label>
+            <input type="number" id="nonVegetarianMembers" min="0" step="1" value="0">
+        </div>
+        <label for="shower">Daily Shower Time per Person (minutes):</label>
+        <input type="number" id="shower" min="0" step="1" value="0">
+        <label for="toilet">Toilet Flushes per Person per Day:</label>
+        <input type="number" id="toilet" min="0" step="1" value="0">
+        <label for="dishwasher">Dishwasher Loads per Week:</label>
+        <input type="number" id="dishwasher" min="0" step="1" value="0">
+        <label for="drinking">Water used for Drinking per Person (liters):</label>
+        <input type="number" id="drinking" min="0" step="0.1" value="0">
+        <label for="watering">Water used for Watering (liters):</label>
+        <input type="number" id="watering" min="0" step="0.1" value="0">
+        <label for="sink">Water used in Sink per Person (liters):</label>
+        <input type="number" id="sink" min="0" step="0.1" value="0">
+        <label for="cooking">Water used for Cooking per Person (liters):</label>
+        <input type="number" id="cooking" min="0" step="0.1" value="0">
+        <label for="state">Select State:</label>
+        <select id="state">
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chattisgarh">Chattisgarh</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Goa">Goa</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="TamilNadu">TamilNadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="UttarPradesh">UttarPradesh</option>
+            <option value="Uttarakhand">Uttarakhand/option>
+            <option value="WestBengal">WestBengal</option>
+            <!-- Add more options for other states -->
+        </select>
+        <label>Do you have a lawn/garden?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="lawn" value="yes"> Yes</label>
+            <label><input type="radio" name="lawn" value="no"> No</label>
+        </div>
+        <label>Do you own a vehicle?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="vehicle" value="yes"> Yes</label>
+            <label><input type="radio" name="vehicle" value="no"> No</label>
+        </div>
+        <label for="mileage">How many miles do you drive per week?</label>
+        <input type="number" id="mileage" min="0" step="1" value="0">
+        <label>Do you recycle:</label>
+        <label>Plastic:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recyclePlastic" value="yes"> Yes</label>
+            <label><input type="radio" name="recyclePlastic" value="no"> No</label>
+        </div>
+        <label>Paper:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recyclePaper" value="yes"> Yes</label>
+            <label><input type="radio" name="recyclePaper" value="no"> No</label>
+        </div>
+        <label>Bottle Cans:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recycleCans" value="yes"> Yes</label>
+            <label><input type="radio" name="recycleCans" value="no"> No</label>
+        </div>
+        <label>Do you donate clothes?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="donateClothes" value="yes"> Yes</label>
+            <label><input type="radio" name="donateClothes" value="no"> No</label>
+        </div>
+        <label>Do you consume coffee, tea, or green tea?</label>
+        <label>Coffee:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="coffee" value="yes"> Yes</label>
+            <label><input type="radio" name="coffee" value="no"> No</label>
+        </div>
+        <label>Tea:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="tea" value="yes"> Yes</label>
+            <label><input type="radio" name="tea" value="no"> No</label>
+        </div>
+        <label>Green Tea:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="greenTea" value="yes"> Yes</label>
+            <label><input type="radio" name="greenTea" value="no"> No</label>
+        </div>
+        <label for="annualIncome">Annual Income (part of total income):</label>
+        <input type="number" id="annualIncome" min="0" step="1" value="0">
+        <button onclick="calculate()">Calculate</button>
+
+        <div class="result" id="result"></div>
+
+
+
+        <div id="waterUsageChart"></div>
+        <div id="recommendations"></div>
+    </div>
+</spline-viewer>
+</div>
+    <script>
+
+         
+                function showVegetarianInputs() {
+                    var numFamilyMembers = parseInt(document.getElementById('familyMembers').value);
+                    if (numFamilyMembers > 0) {
+                        document.getElementById('vegetarianInput').style.display = 'block';
+                        document.getElementById('nonVegetarianInput').style.display = 'block';
+                    } else {
+                        document.getElementById('vegetarianInput').style.display = 'none';
+                        document.getElementById('nonVegetarianInput').style.display = 'none';
+                    }
+                }
+
+        function calculate() {
+            var familyMembers = parseInt(document.getElementById('familyMembers').value);
+            var showerTime = parseInt(document.getElementById('shower').value);
+            var toiletFlushes = parseInt(document.getElementById('toilet').value);
+            var dishwasherLoads = parseInt(document.getElementById('dishwasher').value);
+            var drinkingWater = parseFloat(document.getElementById('drinking').value);
+            var wateringWater = parseFloat(document.getElementById('watering').value);
+            var sinkWater = parseFloat(document.getElementById('sink').value);
+            var cookingWater = parseFloat(document.getElementById('cooking').value);
+            var state = document.getElementById('state').value;
+            var hasLawn = document.querySelector('input[name="lawn"]:checked').value === 'yes';
+            var hasVehicle = document.querySelector('input[name="vehicle"]:checked').value === 'yes';
+            var mileage = parseInt(document.getElementById('mileage').value);
+            var recyclePlastic = document.querySelector('input[name="recyclePlastic"]:checked').value === 'yes';
+            var recyclePaper = document.querySelector('input[name="recyclePaper"]:checked').value === 'yes';
+            var recycleCans = document.querySelector('input[name="recycleCans"]:checked').value === 'yes';
+            var donateClothes = document.querySelector('input[name="donateClothes"]:checked').value === 'yes';
+            var hasCoffee = document.querySelector('input[name="coffee"]:checked').value === 'yes';
+            var hasTea = document.querySelector('input[name="tea"]:checked').value === 'yes';
+            var hasGreenTea = document.querySelector('input[name="greenTea"]:checked').value === 'yes';
+            var annualIncome = parseInt(document.getElementById('annualIncome').value);
+            var vegetarianMembers = parseInt(document.getElementById('vegetarianMembers').value);
+            var nonVegetarianMembers = parseInt(document.getElementById('nonVegetarianMembers').value);
+
+            var waterUsage = ((showerTime * 2) + (toiletFlushes * 6) + (dishwasherLoads * 15) +
+                drinkingWater + wateringWater + sinkWater + cookingWater) * familyMembers;
+
+            // Additional water usage if user has a lawn/garden
+            if (hasLawn) {
+                waterUsage += 20 * familyMembers * 365; // Adjust this value based on the average water usage for a lawn/garden
+            }
+
+            // Additional water usage if user owns a vehicle
+            if (hasVehicle) {
+                waterUsage += mileage * 0.5 * familyMembers * 52; // Assuming 0.5 liters per mile for vehicle usage
+            }
+
+            // Additional water usage if user recycles
+            if (recyclePlastic || recyclePaper || recycleCans) {
+                waterUsage -= 5 * familyMembers * 365; // Adjust this value based on the average water saved by recycling
+            }
+
+            // Additional water usage if user donates clothes
+            if (donateClothes) {
+                waterUsage -= 2 * familyMembers * 365; // Adjust this value based on the water saved by donating clothes
+            }
+
+            // Additional water usage if user consumes coffee, tea, or green tea
+            if (hasCoffee || hasTea || hasGreenTea) {
+                waterUsage += 10 * familyMembers * 365; // Adjust this value based on the water consumed by drinking coffee, tea, or green tea
+            }
+
+            // Additional water usage based on vegetarian and non-vegetarian family members
+            waterUsage += (vegetarianMembers * 5 + nonVegetarianMembers * 15) * 365; // Adjust these values based on average water footprint for vegetarian and non-vegetarian diets
+
+            // Display the result
+            var resultElement = document.getElementById('result');
+            resultElement.innerText = 'Your estimated annual water footprint is: ' + waterUsage.toFixed(2) + ' liters';
+
+            // Convert liters to gallons
+            var gallons = waterUsage * 0.264172;
+            resultElement.innerHTML += '<br>Equivalent to approximately ' + gallons.toFixed(2) + ' gallons.';
+
+
+            // Water usage breakdown
+            var breakdown = {
+                Shower: showerTime * 2 * familyMembers * 365,
+                Toilet: toiletFlushes * 6 * familyMembers * 365,
+                Dishwasher: dishwasherLoads * 15 * familyMembers * 52,
+                Drinking: drinkingWater * familyMembers * 365,
+                Watering: wateringWater,
+                Sink: sinkWater * familyMembers * 365,
+                Cooking: cookingWater * familyMembers * 365,
+                Lawn: hasLawn ? 20 * familyMembers * 365 : 0,
+                Vehicle: hasVehicle ? mileage * 0.5 * familyMembers * 52 : 0,
+                CoffeeTea: (hasCoffee || hasTea || hasGreenTea) ? 10 * familyMembers * 365 : 0,
+                VegetarianDiet: vegetarianMembers * 5 * 365,
+                NonVegetarianDiet: nonVegetarianMembers * 15 * 365,
+                Recycling: (recyclePlastic || recyclePaper || recycleCans) ? -5 * familyMembers * 365 : 0,
+                DonateClothes: donateClothes ? -2 * familyMembers * 365 : 0
+            };
+
+            // Recommendations
+            var recommendations = [];
+            if (showerTime > 10) {
+                recommendations.push("Consider reducing your daily shower time.");
+            }
+            if (toiletFlushes > 5) {
+                recommendations.push("Consider installing a low-flush toilet.");
+            }
+            if (dishwasherLoads > 7) {
+                recommendations.push("Try to run the dishwasher only when it's full.");
+            }
+            if (hasLawn) {
+                recommendations.push("Consider using drought-resistant plants to reduce lawn watering.");
+            }
+            if (hasVehicle) {
+                recommendations.push("Consider carpooling or using public transportation to reduce water usage related to driving.");
+            }
+            if (!recyclePlastic || !recyclePaper || !recycleCans) {
+                recommendations.push("Increase your recycling habits to save water.");
+            }
+            if (!donateClothes) {
+                recommendations.push("Donate clothes to reduce water usage in the production of new clothing.");
+            }
+            if (hasCoffee || hasTea || hasGreenTea) {
+                recommendations.push("Reduce your consumption of coffee, tea, or green tea to lower your water footprint.");
+            }
+
+            document.getElementById('recommendations').innerHTML = recommendations.length > 0
+                ? '<h3>Recommendations:</h3><ul><li>' + recommendations.join('</li><li>') + '</li></ul>'
+                : '';
+
+            // Create the 3D pie chart
+            Highcharts.chart('waterUsageChart', {
+                chart: {
+                    type: 'pie',
+                    options3d: {
+                        enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: 'Water Usage Breakdown'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 35,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.y:.2f} liters'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Water Usage',
+                    data: Object.keys(breakdown).map(function (key) {
+                        return { name: key, y: breakdown[key] };
+                    })
+                }]
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>

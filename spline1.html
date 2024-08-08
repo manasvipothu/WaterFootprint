@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Footprint Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* overflow: hidden;  */
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #waterUsageChart {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+
+<body>
+    <div class="background">
+        <spline-viewer url="https://prod.spline.design/2o70Jxk3tuW-vhRv/scene.splinecode"></spline-viewer>
+    </div>
+
+    <div class="container">
+        <h2>Water Footprint Calculator</h2>
+        <label for="familyMembers">Number of Family Members:</label>
+        <input type="number" id="familyMembers" min="1" step="1" value="1" onchange="showVegetarianInputs()">
+        <div id="vegetarianInput" style="display: none;">
+            <label for="vegetarianMembers">Number of Vegetarian Family Members:</label>
+            <input type="number" id="vegetarianMembers" min="0" step="1" value="0">
+        </div>
+        <div id="nonVegetarianInput" style="display: none;">
+            <label for="nonVegetarianMembers">Number of Non-Vegetarian Family Members:</label>
+            <input type="number" id="nonVegetarianMembers" min="0" step="1" value="0">
+        </div>
+        <label for="shower">Daily Shower Time per Person (minutes):</label>
+        <input type="number" id="shower" min="0" step="1" value="0">
+        <label for="toilet">Toilet Flushes per Person per Day:</label>
+        <input type="number" id="toilet" min="0" step="1" value="0">
+        <label for="dishwasher">Dishwasher Loads per Week:</label>
+        <input type="number" id="dishwasher" min="0" step="1" value="0">
+        <label for="drinking">Water used for Drinking per Person (liters):</label>
+        <input type="number" id="drinking" min="0" step="0.1" value="0">
+        <label for="watering">Water used for Watering (liters):</label>
+        <input type="number" id="watering" min="0" step="0.1" value="0">
+        <label for="sink">Water used in Sink per Person (liters):</label>
+        <input type="number" id="sink" min="0" step="0.1" value="0">
+        <label for="cooking">Water used for Cooking per Person (liters):</label>
+        <input type="number" id="cooking" min="0" step="0.1" value="0">
+        <label for="state">Select State:</label>
+        <select id="state">
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chattisgarh">Chattisgarh</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Goa">Goa</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="TamilNadu">TamilNadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="UttarPradesh">UttarPradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="WestBengal">WestBengal</option>
+            <!-- Add more options for other states -->
+        </select>
+        <label>Do you have a lawn/garden?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="lawn" value="yes"> Yes</label>
+            <label><input type="radio" name="lawn" value="no"> No</label>
+        </div>
+        <label>Do you own a vehicle?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="vehicle" value="yes"> Yes</label>
+            <label><input type="radio" name="vehicle" value="no"> No</label>
+        </div>
+        <label for="mileage">How many miles do you drive per week?</label>
+        <input type="number" id="mileage" min="0" step="1" value="0">
+        <label>Do you recycle:</label>
+        <label>Plastic:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recyclePlastic" value="yes"> Yes</label>
+            <label><input type="radio" name="recyclePlastic" value="no"> No</label>
+        </div>
+        <label>Paper:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recyclePaper" value="yes"> Yes</label>
+            <label><input type="radio" name="recyclePaper" value="no"> No</label>
+        </div>
+        <label>Bottle Cans:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recycleCans" value="yes"> Yes</label>
+            <label><input type="radio" name="recycleCans" value="no"> No</label>
+        </div>
+        <label>Do you donate clothes?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="donateClothes" value="yes"> Yes</label>
+            <label><input type="radio" name="donateClothes" value="no"> No</label>
+        </div>
+        <label>Do you consume coffee, tea, or green tea?</label>
+        <label>Coffee:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="consumeCoffee" value="yes"> Yes</label>
+            <label><input type="radio" name="consumeCoffee" value="no"> No</label>
+        </div>
+        <label>Tea:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="consumeTea" value="yes"> Yes</label>
+            <label><input type="radio" name="consumeTea" value="no"> No</label>
+        </div>
+        <label>Green Tea:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="consumeGreenTea" value="yes"> Yes</label>
+            <label><input type="radio" name="consumeGreenTea" value="no"> No</label>
+        </div>
+        <label for="bathing">Bathing (Times per Week):</label>
+        <input type="number" id="bathing" min="0" step="1" value="0">
+        <label for="handWashing">Hand Washing (Times per Day):</label>
+        <input type="number" id="handWashing" min="0" step="1" value="0">
+        <button onclick="calculateWaterFootprint()">Calculate Water Footprint</button>
+        <div class="result" id="result"></div>
+        <div id="waterUsageChart"></div>
+    </div>
+
+    <script>
+        function showVegetarianInputs() {
+            const familyMembers = document.getElementById('familyMembers').value;
+            if (familyMembers > 0) {
+                document.getElementById('vegetarianInput').style.display = 'block';
+                document.getElementById('nonVegetarianInput').style.display = 'block';
+            } else {
+                document.getElementById('vegetarianInput').style.display = 'none';
+                document.getElementById('nonVegetarianInput').style.display = 'none';
+            }
+        }
+
+        function calculateWaterFootprint() {
+            const familyMembers = parseFloat(document.getElementById('familyMembers').value) || 0;
+            const vegetarianMembers = parseFloat(document.getElementById('vegetarianMembers').value) || 0;
+            const nonVegetarianMembers = parseFloat(document.getElementById('nonVegetarianMembers').value) || 0;
+            const shower = parseFloat(document.getElementById('shower').value) || 0;
+            const toilet = parseFloat(document.getElementById('toilet').value) || 0;
+            const dishwasher = parseFloat(document.getElementById('dishwasher').value) || 0;
+            const drinking = parseFloat(document.getElementById('drinking').value) || 0;
+            const watering = parseFloat(document.getElementById('watering').value) || 0;
+            const sink = parseFloat(document.getElementById('sink').value) || 0;
+            const cooking = parseFloat(document.getElementById('cooking').value) || 0;
+            const mileage = parseFloat(document.getElementById('mileage').value) || 0;
+            const bathing = parseFloat(document.getElementById('bathing').value) || 0;
+            const handWashing = parseFloat(document.getElementById('handWashing').value) || 0;
+
+            const dailyShowerWaterUsage = shower * 9.5 * familyMembers;
+            const dailyToiletWaterUsage = toilet * 9.8 * familyMembers;
+            const weeklyDishwasherWaterUsage = dishwasher * 15;
+            const dailyDrinkingWaterUsage = drinking * familyMembers;
+            const dailyWateringWaterUsage = watering;
+            const dailySinkWaterUsage = sink * familyMembers;
+            const dailyCookingWaterUsage = cooking * familyMembers;
+            const weeklyBathingWaterUsage = bathing * 40 * familyMembers;
+            const dailyHandWashingWaterUsage = handWashing * 2 * familyMembers;
+
+            const totalDailyWaterUsage = dailyShowerWaterUsage + dailyToiletWaterUsage + (weeklyDishwasherWaterUsage / 7) + dailyDrinkingWaterUsage + dailyWateringWaterUsage + dailySinkWaterUsage + dailyCookingWaterUsage + (weeklyBathingWaterUsage / 7) + dailyHandWashingWaterUsage;
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `
+                <h3>Daily Water Footprint</h3>
+                <p>Total Daily Water Usage: ${totalDailyWaterUsage.toFixed(2)} liters</p>
+            `;
+
+            // Create the chart
+            Highcharts.chart('waterUsageChart', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Daily Water Usage Breakdown'
+                },
+                xAxis: {
+                    categories: [
+                        'Shower',
+                        'Toilet',
+                        'Dishwasher',
+                        'Drinking',
+                        'Watering',
+                        'Sink',
+                        'Cooking',
+                        'Bathing',
+                        'Hand Washing'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Water Usage (liters)'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} liters</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Water Usage',
+                    data: [
+                        dailyShowerWaterUsage,
+                        dailyToiletWaterUsage,
+                        weeklyDishwasherWaterUsage / 7,
+                        dailyDrinkingWaterUsage,
+                        dailyWateringWaterUsage,
+                        dailySinkWaterUsage,
+                        dailyCookingWaterUsage,
+                        weeklyBathingWaterUsage / 7,
+                        dailyHandWashingWaterUsage
+                    ]
+                }]
+            });
+        }
+    </script>
+</body>
+
+</html>
+
+</body>
+</html>

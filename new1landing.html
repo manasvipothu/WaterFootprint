@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterfootprint</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            /* background: black; */
+
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #0ed1f3;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #2980b9 3px solid;
+        }
+
+        header h1 {
+            float: left;
+            margin-top: 10px;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        header nav ul {
+            list-style: none;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin-left: 20px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #hero {
+            background: url('water.jpg') no-repeat center center/cover;
+            color: #0f0f0f;
+            height: 600px;
+            position: relative;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #hero h2 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        #hero p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            color: #0a0909;
+            background: #26e714;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+        }
+
+        .container button {
+            display: inline-block;
+            color: #0a0909;
+            background: #26e714;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #7bee71
+        }
+
+
+        #features {
+            padding: 50px 0;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        #features .feature {
+            width: 30%;
+            float: left;
+            margin: 0 1.5%;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+
+        #features .feature h3 {
+            margin-bottom: 20px;
+        }
+
+        #about {
+            padding: 50px 0;
+            background: #fff;
+            text-align: center;
+            position: relative;
+            top: -178px;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            top: -190px;
+        }
+
+        @media (max-width: 768px) {
+            header nav ul li {
+                display: block;
+                margin: 0;
+                text-align: center;
+            }
+
+            header nav {
+                float: none;
+            }
+
+            header h1 {
+                float: none;
+                text-align: center;
+            }
+
+            #features .feature {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .content1 h2 {
+                font-size: 60px;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .content1 {
+                height: 200px;
+            }
+
+            #hero {
+                height: 400px;
+                padding-top: 100px;
+            }
+
+            #hero h2 {
+                font-size: 36px;
+            }
+
+            #hero p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content1 h2 {
+                font-size: 40px;
+            }
+
+            #hero h2 {
+                font-size: 24px;
+            }
+
+            #hero p {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+            }
+        }
+
+        .custom-shape-divider-bottom-1718692516 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .custom-shape-divider-bottom-1718692516 svg {
+            position: relative;
+            display: block;
+            width: calc(124% + 1.3px);
+            height: 177px;
+        }
+
+        .custom-shape-divider-bottom-1718692516 .shape-fill {
+            fill: #f6f6f7;
+        }
+
+        main {
+            background: linear-gradient(rgb(5, 91, 202), rgb(114, 188, 231));
+            background-image: url(https://images.wallpaperscraft.com/image/single/waves_water_surface_139154_1920x1080.jpg);
+        }
+
+        .container1 {
+            position: relative;
+            top: -162px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 50px 0;
+            gap: 40px 60px;
+
+        }
+
+        .container1 .drop {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            background: #f0ecec;
+            box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05), 25px 35px 20px rgba(0, 0, 0, 0.05), 25px 30px 30px rgba(0, 0, 0, 0.05), inset -20px -20px 25px rgba(255, 255, 255, 0.9);
+        }
+
+        .container1 .drop:nth-child(1) {
+            border-radius: 57% 43% 43% 57% / 43% 43% 57% 57%;
+        }
+
+        .container1 .drop:nth-child(2) {
+            border-radius: 73% 27% 59% 41% / 57% 59% 41% 43%;
+        }
+
+        .container1 .drop:nth-child(3) {
+            border-radius: 35% 65% 31% 69% / 57% 59% 41% 43%;
+        }
+
+        .container1 .drop:hover {
+            border-radius: 50%;
+        }
+
+        .container1 .drop::before {
+            content: '';
+            position: absolute;
+            top: 90px;
+            left: 110px;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.9;
+        }
+
+        .container1 .drop .content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 18px;
+            gap: 13px;
+            color: black;
+        }
+
+        .container1 .drop .content h2 {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            background: #eff0f4;
+            border-radius: 50%;
+            box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1), inset -2px -5px 10px rgba(255, 255, 255, 1), 15px 15px 10px rgba(0, 0, 0, 0.05), 15px 10px 15px rgba(0, 0, 0, 0.025);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: var(--clr);
+        }
+
+
+        .container1 .drop .content button {
+            position: relative;
+            padding: 10px 25px;
+            background: var(--clr);
+            text-decoration: none;
+            color: #fff;
+            border-radius: 25px;
+            font-weight: 500;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+            opacity: 0.75;
+            transition: 0.5s;
+        }
+
+        .container1 .drop .content button:hover {
+            opacity: 1;
+        }
+
+        .container1 .drop .content button::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65%;
+            height: 5px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        footer {
+            position: relative;
+            top: -2px;
+            width: 100%;
+            background: #3586ff;
+            min-height: 100px;
+            padding: 20px 50px;
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+        }
+
+        footer .social_icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        footer .social_icon li {
+            list-style: none;
+        }
+
+        footer .social_icon li a {
+            font-size: 2em;
+            color: #fff;
+            margin: 0 10px;
+            display: inline-block;
+            transition: 0.5s;
+        }
+
+        footer .social_icon li a:hover {
+            transform: translateY(-10px);
+        }
+
+        footer .menu li a {
+            font-size: 1.2em;
+            color: #fff;
+            margin: 0 10px;
+            /* display: inline-block; */
+            transition: 0.5s;
+            text-decoration: none;
+            opacity: 0.75;
+            display: inline;
+
+        }
+
+        footer .menu li a:hover {
+            opacity: 1;
+        }
+
+        footer p {
+            color: #fff;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        footer .wave {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url(wave.png.jpeg);
+            background-size: 1000px 100px;
+        }
+
+        footer .wave#wave1 {
+            z-index: 1000;
+            opacity: 1;
+            bottom: 0;
+            animation: animateWave 4s linear infinite;
+        }
+
+        footer .wave#wave2 {
+            z-index: 999;
+            opacity: 0.5;
+            bottom: 10px;
+            animation: animateWave_02 4s linear infinite;
+        }
+
+        footer .wave#wave3 {
+            z-index: 1000;
+            opacity: 0.2;
+            bottom: 15px;
+            animation: animateWave 3s linear infinite;
+        }
+
+        footer .wave#wave4 {
+            z-index: 999;
+            opacity: 0.7;
+            bottom: 20px;
+            animation: animateWave_02 3s linear infinite;
+        }
+
+        @keyframes animateWave {
+            0% {
+                background-position-x: 1000px;
+            }
+        }
+
+        @keyframes animateWave_02 {
+            0% {
+                background-position-x: 0px;
+            }
+
+            100% {
+                background-position-x: 1000px;
+            }
+        }
+
+
+
+
+
+
+        @media (max-width: 768px) {
+            .info-box {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* menu btn styling */
+        .menu-btn {
+            color: #fff;
+            font-size: 23px;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media (max-width: 947px) {
+            .menu-btn {
+                display: block;
+                z-index: 999;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Waterfootprint</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="calculator.html">Calculator</a></li>
+                    <li><a href="#features">More information</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="Contactus.html">Contact</a></li>
+                </ul>
+                <div class="menu-btn">
+                    <i class="fas fa-bars"></i>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Track Your Water Usage</h2>
+                <p>Join the movement to conserve and protect our planet Earth</p>
+                <button onclick="location.href='calculator.html'">Calculate Your WaterFootprint</button>
+                <!-- <a href="#features" class="btn">Calculate Your WaterFootprint</a> -->
+                </button>
+            </div>
+            <div class="custom-shape-divider-bottom-1718692516">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path
+                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                        class="shape-fill"></path>
+                </svg>
+            </div>
+        </section>
+
+
+    </main>
+    <section id="features">
+        <div class="container1">
+            <div class="drop" style="--clr:#ff0f5b;">
+                <div class="content">
+                    <h2>01</h2>
+                    <p>What is WaterFootprint?</p>
+                    <p>Water footprint refers to the total volume of freshwater that is used directly or indirectly
+                        to produce goods and services consumed by an individual</p>
+                    <button onclick="location.href='moreinfo.html'">Read More
+                        <!-- <a href="#">Read More</a> -->
+                    </button>
+                </div>
+            </div>
+            <div class="drop" style="--clr:#be01fe;">
+                <div class="content">
+                    <h2>02</h2>
+                    <p>What are the components of WaterFootprint?</p>
+                    <p>Green Water Footprint</p>
+                    <p>Blue Water Footprint</p>
+                    <p>Grey Water Footprint </p>
+                    <button onclick="location.href='moreinfo.html'">Read More
+                        <!-- <a href="#">Read More</a> -->
+                    </button>
+                </div>
+            </div>
+            <div class="drop" style="--clr:#01b4ff;">
+                <div class="content">
+                    <h2>03</h2>
+                    <p>How to reduce WaterFootprint?</p>
+                    <p>Reduce, Reuse, Recycle</p>
+                    <p>Smart Consumption</p>
+                    <p>Sustainable Agriculture</p>
+                    <button onclick="location.href='moreinfo.html'">Read More
+                        <!-- <a href="#">Read More</a> -->
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Waterfootprint is dedicated to helping individuals and businesses reduce their water usage and contribute
+                to a more sustainable future.</p>
+            <p>Our mission is to raise awareness about the importance of water conservation and to empower individuals
+                and organizations to reduce their water footprint. We believe that by making small changes in our daily
+                lives, we can collectively make a significant impact on preserving our planet's most precious resource:
+                water.</p>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="waves"></div>
+        <div class="wave" id="wave1"></div>
+        <div class="wave" id="wave2"></div>
+        <div class="wave" id="wave3"></div>
+        <div class="wave" id="wave4"></div>
+        </div>
+        <ul class="social_icon">
+            <li><a href="#"><ion-icon name="logo-facebook"></ion-icon>
+                </a></li>
+            <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+        </ul>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About </a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Donate</a></li>
+        </ul>
+    </footer>
+
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

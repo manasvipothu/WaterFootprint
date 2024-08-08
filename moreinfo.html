@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            /* background: black; */
+
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #0ed1f3;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #2980b9 3px solid;
+        }
+
+        header h1 {
+            float: left;
+            margin-top: 10px;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        header nav ul {
+            list-style: none;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin-left: 20px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main h1 {
+            position: relative;
+            top: 40px;
+        }
+
+        main p {
+            position: relative;
+            top: 70px;
+        }
+
+        main .components h1 {
+            position: relative;
+            top: 100px;
+        }
+
+        main .components p {
+            position: relative;
+            top: 120px;
+        }
+
+        main .significance h1 {
+            position: relative;
+            top: 140px;
+        }
+
+        main .significance p {
+            position: relative;
+            top: 160px;
+        }
+
+        main .reduce h1 {
+            position: relative;
+            top: 180px;
+        }
+
+        main .reduce p {
+            position: relative;
+            top: 200px;
+        }
+
+        footer {
+            position: relative;
+            top: 560px;
+            width: 100%;
+            background: #3586ff;
+            min-height: 100px;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer .social_icon {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        footer .social_icon li {
+            list-style: none;
+        }
+
+        footer .social_icon li a {
+            font-size: 2em;
+            color: #fff;
+            margin: 0 10px;
+            display: inline-block;
+            transition: 0.5s;
+        }
+
+        footer .social_icon li a:hover {
+            transform: translateY(-10px);
+        }
+
+        footer .menu li a {
+            font-size: 1.2em;
+            color: #fff;
+            margin: 0 10px;
+            display: inline-block;
+            transition: 0.5s;
+            text-decoration: none;
+            opacity: 0.75;
+        }
+
+        footer .menu li a:hover {
+            opacity: 1;
+        }
+
+        footer p {
+            color: #fff;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        footer .wave {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url(wave.png.jpeg);
+            background-size: 1000px 100px;
+        }
+
+        footer .wave#wave1 {
+            z-index: 1000;
+            opacity: 1;
+            bottom: 0;
+            animation: animateWave 4s linear infinite;
+        }
+
+        footer .wave#wave2 {
+            z-index: 999;
+            opacity: 0.5;
+            bottom: 10px;
+            animation: animateWave_02 4s linear infinite;
+        }
+
+        footer .wave#wave3 {
+            z-index: 1000;
+            opacity: 0.2;
+            bottom: 15px;
+            animation: animateWave 3s linear infinite;
+        }
+
+        footer .wave#wave4 {
+            z-index: 999;
+            opacity: 0.7;
+            bottom: 20px;
+            animation: animateWave_02 3s linear infinite;
+        }
+
+        @keyframes animateWave {
+            0% {
+                background-position-x: 1000px;
+            }
+        }
+
+        @keyframes animateWave_02 {
+            0% {
+                background-position-x: 0px;
+            }
+
+            100% {
+                background-position-x: 1000px;
+            }
+        }
+        img{
+            width: 100px;
+           position: relative;
+           left: -380px;
+           background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <img src="logo.PNG" alt="" srcset="">
+            <h1>Waterfootprint</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#">Calculator</a></li>
+                    <li><a href="#features">More information</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h1>What is WaterFootprint?</h1>
+        <p>Water footprint refers to the total volume of freshwater that is used directly or indirectly
+            to produce goods and services consumed by an individual. It encompasses all water usage, from direct
+            consumption (like drinking and bathing) to indirect consumption embedded in products and services (such as
+            the water used to grow food or manufacture goods). The concept was introduced by Arjen Y. Hoekstra in 2002
+            and has since become a crucial tool for water management. </p>
+        <div class="components">
+            <h1>Components of Water Footprint</h1>
+            <p>A water footprint is typically divided into three main components:</p>
+            <p id="main2">1. Blue Water Footprint: This represents the volume of surface and groundwater consumed during
+                production processes. For example, irrigation in agriculture or the water used in industrial processes
+                falls under this category.</p>
+            <p>
+                2. Green Water Footprint: This refers to the volume of rainwater consumed. It is particularly relevant in
+                agriculture, where crops rely on rainfall rather than irrigation.
+            </p>
+            <p>
+           3. Grey Water Footprint: This measures the volume of freshwater required to assimilate pollutants, ensuring
+            that water quality remains within acceptable standards. It is an indicator of water pollution associated
+            with production processes.</p>
+        </div>
+        <div class="significance"> 
+            <h1>Significance of Water Footprint</h1>
+            <p>Understanding water footprints is essential for several reasons:
+
+            </p>
+            <p>1. Resource Management: By analyzing water footprints, we can identify areas of high water consumption and
+                implement strategies to reduce usage and improve efficiency. This is crucial in regions facing water
+                scarcity. </p>
+
+                <p>
+                2. Environmental Impact: Water footprints help in assessing the environmental impact of our consumption
+                patterns. Reducing our water footprint can mitigate the adverse effects on ecosystems and biodiversity.
+            </p>
+                <p>
+                3. Sustainable Practices: Businesses can use water footprint data to adopt more sustainable practices, such
+                as optimizing water use in production processes or sourcing materials from regions with abundant water
+                supplies. </p>
+
+                <p>
+                4. Consumer Awareness: Educating consumers about their water footprint can lead to more informed choices,
+                encouraging the purchase of products with lower water footprints and supporting sustainable brands.</p>
+        </div>
+        <div class="reduce">
+            <h1>How to reduce WaterFootprint?</h1>
+            <p>Reducing water footprints requires a multifaceted approach:
+
+            </p>
+            <p>1. Efficient Water Use: Implementing water-saving technologies and practices in agriculture, industry, and
+                households can significantly reduce water consumption. </p>
+
+                <p>  2. Sustainable Agriculture: Adopting practices like rainwater harvesting, drip irrigation, and selecting
+                drought-resistant crops can lower the green and blue water footprints in agriculture. </p>
+
+                <p>  3. Pollution Control: Reducing the use of harmful chemicals and improving wastewater treatment processes
+                can decrease the grey water footprint. </p>
+
+                <p> 4. Policy and Regulation: Governments can play a pivotal role by enacting policies that promote water
+                conservation and sustainable water management practices.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="waves"></div>
+        <div class="wave" id="wave1"></div>
+        <div class="wave" id="wave2"></div>
+        <div class="wave" id="wave3"></div>
+        <div class="wave" id="wave4"></div>
+        </div>
+        <ul class="social_icon">
+            <li><a href="#"><ion-icon name="logo-facebook"></ion-icon>
+                </a></li>
+            <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+            <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+        </ul>
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About </a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Donate</a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>
