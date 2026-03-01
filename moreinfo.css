@@ -1,0 +1,352 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    color: white;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+/* ================= NAVBAR ================= */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgb(0, 145, 255);
+}
+
+nav {
+    display: flex;
+    padding: 15px 0 15px 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1300px;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+nav .nav_logo a {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+nav .nav_logo h2 {
+    color: white;
+    font-weight: 600;
+    font-size: 32px;
+}
+
+nav ul {
+    display: flex;
+    gap: 10px;
+}
+
+nav ul li a {
+    display: block;
+    padding: 10px 25px;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+
+nav ul li a:hover {
+    color: rgb(73, 172, 234);
+    background-color: rgb(0, 217, 255);
+}
+
+nav label {
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+}
+
+label .menu_btn,
+label .close_btn {
+    display: none;
+}
+
+#click {
+    display: none;
+}
+
+@media screen and (max-width: 1024px) {
+    nav {
+        padding: 15px 20px;
+    }
+
+    label .menu_btn {
+        display: block;
+    }
+
+    nav ul {
+        display: block;
+        background: white;
+        position: absolute;
+        top: 75px;
+        left: -100%;
+        overflow-y: auto;
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: all 0.15s ease;
+    }
+
+    #click:checked~ul {
+        left: 0;
+    }
+
+    #click:checked~label .close_btn {
+        display: block;
+    }
+
+    #click:checked~label .menu_btn {
+        display: none;
+    }
+
+    nav ul li {
+        display: block;
+        padding: 8px 12px;
+        width: 48%;
+        margin: 24px auto;
+    }
+
+    nav ul li a {
+        color: black;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    nav .nav_logo h2 {
+        font-size: 30px;
+    }
+}
+
+/* ================= MAIN SECTION ================= */
+
+main {
+    padding: 140px 10% 60px 10%;
+}
+
+main h1 {
+    margin-bottom: 15px;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+main p {
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+/* Glass Cards */
+.components,
+.significance,
+.reduce {
+    margin-top: 50px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: 0.4s ease;
+}
+
+.components:hover,
+.significance:hover,
+.reduce:hover {
+    transform: translateY(-10px);
+}
+
+/* ================= FOOTER ================= */
+
+/* Footer styles from new1landing */
+footer {
+    background: #0b62d4;
+    padding: 40px 0 20px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+footer .wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('wave.svg') repeat-x;
+    background-size: 2000px 100px;
+    animation: wave 25s linear infinite;
+}
+
+footer .wave#wave1 {
+    z-index: 1000;
+    opacity: 1;
+    animation-duration: 15s;
+}
+
+footer .wave#wave2 {
+    z-index: 999;
+    opacity: 0.5;
+    animation-duration: 20s;
+    top: 10px;
+}
+
+footer .wave#wave3 {
+    z-index: 1000;
+    opacity: 0.3;
+    animation-duration: 30s;
+    top: 20px;
+}
+
+footer .wave#wave4 {
+    z-index: 999;
+    opacity: 0.2;
+    animation-duration: 35s;
+    top: 25px;
+}
+
+@keyframes wave {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 2000px;
+    }
+}
+
+.footer_section {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.footer_section h3 {
+    font-size: 22px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.footer_section .footer_logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.footer_section .footer_logo a h2 {
+    color: white;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.footer_section .useful_links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer_section .useful_links ul li {
+    margin: 15px 0;
+}
+
+.footer_section .useful_links ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.footer_section .useful_links ul li a:hover {
+    color: #00d4ff;
+    text-decoration: underline;
+}
+
+.footer_section .contact_us ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer_section .contact_us ul li {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.footer_section .contact_us ul li i {
+    font-size: 22px;
+    color: #00d4ff;
+}
+
+.footer_section .follow_us {
+    display: flex;
+    gap: 15px;
+}
+
+.footer_section .follow_us i {
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.footer_section .follow_us i:hover {
+    color: #00d4ff;
+    transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+    .footer_section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer_section .footer_logo a {
+        justify-content: center;
+    }
+
+    .footer_section .contact_us ul li {
+        justify-content: center;
+    }
+
+    .footer_section .follow_us {
+        justify-content: center;
+    }
+}
+
+/* Fullscreen Canvas */
+#waterCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(180deg, #0077b6, #00b4d8, #90e0ef);
+}

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+      body {
+    font-family: "Outfit", sans-serif;
+    background: url("https://images.wallpaperscraft.com/image/single/underwater_world_ocean_corals_140760_1920x1080.jpg") no-repeat center center/cover;
+}
+
+         header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+            background: rgb(0, 145, 255);
+        }
+
+        nav {
+            display: flex;
+            padding: 15px 0 15px 20px;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            max-width: 1300px;
+        }
+a {
+  text-decoration: none;
+}
+        nav .nav_logo a {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav .nav_logo a img {
+            max-width: 55px;
+        }
+
+        nav .nav_logo h2 {
+            color: white;
+            font-weight: 600;
+            font-size: 32px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 10px;
+        }
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+        nav ul li a {
+            display: block;
+            padding: 10px 25px;
+            font-size: 18px;
+            font-weight: 500;
+            color: white;
+            border-radius: 30px;
+            transition: all 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            color: rgb(73, 172, 234);
+            background-color: rgb(0, 217, 255);
+        }
+
+        nav label {
+            font-size: 32px;
+            color: var(--white-color);
+            cursor: pointer;
+        }
+
+        label .menu_btn,
+        label .close_btn {
+            display: none;
+        }
+
+        #click {
+            display: none;
+        }
+        @media screen and (max-width: 1024px) {
+    nav {
+        padding: 15px 20px;
+    }
+
+    label .menu_btn {
+        display: block;
+    }
+
+    nav ul {
+        display: block;
+        background: white;
+        position: absolute;
+        top: 75px;
+        left: -100%;
+        overflow-y: auto;
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: all 0.15s ease;
+    }
+
+    #click:checked~ul {
+        left: 0;
+    }
+
+    #click:checked~label .close_btn {
+        display: block;
+    }
+
+    #click:checked~label .menu_btn {
+        display: none;
+    }
+
+    nav ul li {
+        display: block;
+        padding: 8px 12px;
+        width: 48%;
+        margin: 24px auto;
+    }
+
+    nav ul li a {
+        color: black;
+    }
+    .footer_section {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer_section .useful_links {
+        text-align: start;
+    }
+}
+
+
+
+        .contact-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(0, 119, 182, 0.6),
+        rgba(0, 168, 204, 0.4)
+    );
+}
+
+      .contact-form {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    padding: 35px;
+
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    box-shadow:
+        0 8px 32px rgba(0, 119, 182, 0.25),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+
+    transition: all 0.3s ease;
+}
+
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 15px 40px rgba(0, 119, 182, 0.35),
+        inset 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+        .form-title h2 {
+            font-weight: 700;
+            color: #0077b6;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .form-title hr {
+            border: none;
+            width: 100px;
+            height: 3px;
+            background-color: #0077b6;
+            border-radius: 5px;
+            margin: 10px auto;
+        }
+
+        .form-input,
+.form-textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 15px;
+
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    outline: none;
+    font-size: 16px;
+    color: white;
+
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border: 1px solid rgba(0, 168, 204, 0.8);
+    box-shadow: 0 0 15px rgba(0, 168, 204, 0.4);
+}
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: #0077b6;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #7fa9bf;
+        }
+
+        .form-textarea {
+            height: 120px;
+            resize: none;
+        }
+
+       .submit-btn {
+    padding: 15px 20px;
+    font-size: 18px;
+    color: white;
+
+    background: rgba(0, 168, 204, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    box-shadow: 0 8px 20px rgba(0, 168, 204, 0.4);
+}
+
+.submit-btn:hover {
+    background: rgba(0, 168, 204, 0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 168, 204, 0.6);
+}
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #0096c7, #00a8cc);
+            transform: translateY(-3px);
+        }
+
+        .submit-btn img {
+            height: 16px;
+            margin-left: 10px;
+        }
+
+        .form-image img {
+            width: 450px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 102, 0.1);
+        }
+
+
+
+        
+        footer {
+            background: #0b62d4;
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .footer_section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer_section h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .footer_section .footer_logo a {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            color: var(--white-color);
+        }
+
+        .footer_section .footer_logo a img {
+            max-width: 55px;
+        }
+
+        .footer_section .footer_logo a h2 {
+            font-weight: 600;
+        }
+
+        .footer_section .useful_links ul li {
+            margin: 20px 0;
+        }
+
+        .footer_section .useful_links ul li a {
+            color: var(--white-color);
+            font-size: 17px;
+        }
+
+        .footer_section .useful_links ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .footer_section .contact_us ul li {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer_section .contact_us ul li i {
+            font-size: 25px;
+        }
+
+        .footer_section .contact_us ul li span {
+            font-size: 17px;
+        }
+
+        .footer_section .follow_us i {
+            font-size: 26px;
+            margin-right: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .footer_section .follow_us i:hover {
+            color: var(--secondary-color);
+        }
+
+
+
+
+        @media (max-width: 1024px) {
+            .contact-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 30px;
+            }
+
+            .form-image img {
+                width: 100%;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+
+     <!-- Header & Navbar Section -->
+    <header>
+        <nav>
+            <div class="nav_logo">
+                <a href="#">
+                    <!-- <img src="images/coffee_logo.png" alt="Coffee Logo" /> -->
+                    <h2>WaterFootprint</h2>
+                </a>
+            </div>
+
+            <input type="checkbox" id="click" />
+            <label for="click">
+                <i class="menu_btn bx bx-menu"></i>
+                <i class="close_btn bx bx-x"></i>
+            </label>
+
+            <ul>
+                <li><a href="dasboard.html">Home</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="moreinfo.html">More information</a></li>
+                
+                <!-- <li><a href="#gallery">Team</a></li> -->
+                <li><a href="contact.html">Contact</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+
+    <div class="contact-container">
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+            <div class="form-title">
+                <h2>Contact Us</h2>
+                <hr />
+            </div>
+            <input type="hidden" name="access_key" value="5e5eb955-699c-41ef-99fa-c1bad7ab577f" />
+            <input type="text" name="name" placeholder="Your Name" class="form-input" required />
+            <input type="email" name="email" placeholder="Your Email" class="form-input" required />
+            <textarea name="message" placeholder="Write your message..." class="form-textarea" required></textarea>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        <div class="form-image"></div>
+    </div>
+
+
+      <footer>
+      
+       
+        <div class="section_container">
+            <div class="footer_section">
+                <div class="footer_logo">
+                    <a href="index.html">
+                        <!-- <img src="images/coffee_logo.png" alt="Coffee Logo" /> -->
+                        <h2>WaterFootprint</h2>
+                    </a>
+                </div>
+                <div class="follow_us">
+                    <h3>Follow</h3>
+                    <i class="bx bxl-facebook-circle"></i>
+                    <i class="bx bxl-twitter"></i>
+                    <i class="bx bxl-instagram-alt"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Footprint Calculator</title>
+    
+    <style>
+        /* Header styles from new1landing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background: linear-gradient(135deg, #03244d, #055c92, #59a5c6);
+    overflow-x: hidden;
+}
+
+        /* Styling for the header section */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+            background: rgb(0, 145, 255);
+        }
+
+        nav {
+            display: flex;
+            padding: 15px 0 15px 20px;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            max-width: 1300px;
+        }
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+        nav .nav_logo a {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav .nav_logo a img {
+            max-width: 55px;
+        }
+
+        nav .nav_logo h2 {
+            color: white;
+            font-weight: 600;
+            font-size: 32px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 25px;
+            font-size: 18px;
+            font-weight: 500;
+            color: white;
+            border-radius: 30px;
+            transition: all 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            color: rgb(73, 172, 234);
+            background-color: rgb(0, 217, 255);
+        }
+
+        nav label {
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+        }
+
+        label .menu_btn,
+        label .close_btn {
+            display: none;
+        }
+
+        #click {
+            display: none;
+        }
+
+        @media screen and (max-width: 1024px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            label .menu_btn {
+                display: block;
+            }
+
+            nav ul {
+                display: block;
+                background: white;
+                position: absolute;
+                top: 75px;
+                left: -100%;
+                overflow-y: auto;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                transition: all 0.15s ease;
+            }
+
+            #click:checked~ul {
+                left: 0;
+            }
+
+            #click:checked~label .close_btn {
+                display: block;
+            }
+
+            #click:checked~label .menu_btn {
+                display: none;
+            }
+
+            nav ul li {
+                display: block;
+                padding: 8px 12px;
+                width: 48%;
+                margin: 24px auto;
+            }
+
+            nav ul li a {
+                color: black;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            nav .nav_logo a img {
+                max-width: 45px;
+            }
+
+            nav .nav_logo h2 {
+                font-size: 30px;
+            }
+        }
+
+        /* Main content padding to account for fixed header */
+        .main-content {
+            padding-top: 80px;
+        }
+
+        .container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 20px;
+
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.37),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+
+    transition: 0.4s ease;
+}
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+       input[type="number"],
+select {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+
+    color: white;
+    outline: none;
+
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border: 1px solid #00f2ff;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.6);
+}
+
+button {
+    padding: 12px 25px;
+    background: rgba(0, 255, 255, 0.15);
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+button:hover {
+    background: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: translateY(-3px);
+}
+
+       
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+        #waterUsageChart {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer styles from new1landing */
+        footer {
+            background: #0b62d4;
+            padding: 40px 0 20px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        footer .wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('wave.svg') repeat-x;
+            background-size: 2000px 100px;
+            animation: wave 25s linear infinite;
+        }
+
+        footer .wave#wave1 {
+            z-index: 1000;
+            opacity: 1;
+            animation-duration: 15s;
+        }
+
+        footer .wave#wave2 {
+            z-index: 999;
+            opacity: 0.5;
+            animation-duration: 20s;
+            top: 10px;
+        }
+
+        footer .wave#wave3 {
+            z-index: 1000;
+            opacity: 0.3;
+            animation-duration: 30s;
+            top: 20px;
+        }
+
+        footer .wave#wave4 {
+            z-index: 999;
+            opacity: 0.2;
+            animation-duration: 35s;
+            top: 25px;
+        }
+
+        @keyframes wave {
+            0% {
+                background-position-x: 0;
+            }
+            100% {
+                background-position-x: 2000px;
+            }
+        }
+
+        .footer_section {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer_section h3 {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer_section .footer_logo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .footer_section .footer_logo a h2 {
+            color: white;
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .footer_section .useful_links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer_section .useful_links ul li {
+            margin: 15px 0;
+        }
+
+        .footer_section .useful_links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .footer_section .useful_links ul li a:hover {
+            color: #00d4ff;
+            text-decoration: underline;
+        }
+
+        .footer_section .contact_us ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer_section .contact_us ul li {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .footer_section .contact_us ul li i {
+            font-size: 22px;
+            color: #00d4ff;
+        }
+
+        .footer_section .follow_us {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer_section .follow_us i {
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer_section .follow_us i:hover {
+            color: #00d4ff;
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .footer_section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer_section .footer_logo a {
+                justify-content: center;
+            }
+
+            .footer_section .contact_us ul li {
+                justify-content: center;
+            }
+
+            .footer_section .follow_us {
+                justify-content: center;
+            }
+        }
+
+        #waterCanvas1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+     z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, #0077b6, #00b4d8, #90e0ef);
+}
+
+
+
+    </style>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+
+<body>
+
+   
+ <canvas id="waterCanvas1"></canvas>
+    <!-- Header & Navbar Section -->
+    <header>
+        <nav>
+            <div class="nav_logo">
+                <a href="#">
+                    <h2>WaterFootprint</h2>
+                </a>
+            </div>
+
+            <input type="checkbox" id="click" />
+            <label for="click">
+                <i class="menu_btn bx bx-menu">&#9776;</i>
+                <i class="close_btn bx bx-x">&#10005;</i>
+            </label>
+
+            <ul>
+                <li><a href="dasboard.html">Home</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="moreinfo.html">More information</a></li>
+             
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+        <h2>Water Footprint Calculator</h2>
+        <label for="familyMembers">Number of Family Members:</label>
+        <input type="number" id="familyMembers" min="1" step="1" value="" onchange="showVegetarianInputs()">
+        <div id="vegetarianInput" style="display: none;">
+            <label for="vegetarianMembers">Number of Vegetarian Family Members:</label>
+            <input type="number" id="vegetarianMembers" min="0" step="1" value="0">
+        </div>
+        <div id="nonVegetarianInput" style="display: none;">
+            <label for="nonVegetarianMembers">Number of Non-Vegetarian Family Members:</label>
+            <input type="number" id="nonVegetarianMembers" min="0" step="1" value="0">
+        </div>
+        <label for="shower">Daily Shower Time per Person (minutes):</label>
+        <input type="number" id="shower" min="0" step="1" value="">
+        <label for="toilet">Toilet Flushes per Person per Day:</label>
+        <input type="number" id="toilet" min="0" step="1" value="">
+        <label for="dishwasher">Dishwasher Loads per Week:</label>
+        <input type="number" id="dishwasher" min="0" step="1" value="">
+        <label for="drinking">Water used for Drinking per Person (liters):</label>
+        <input type="number" id="drinking" min="0" step="0.1" value="">
+        <label for="watering">Water used for Watering (liters):</label>
+        <input type="number" id="watering" min="0" step="0.1" value="">
+        <label for="sink">Water used in Sink per Person (liters):</label>
+        <input type="number" id="sink" min="0" step="0.1" value="">
+        <label for="cooking">Water used for Cooking per Person (liters):</label>
+        <input type="number" id="cooking" min="0" step="0.1" value="">
+        <label for="state">Select State:</label>
+        <select id="state">
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chattisgarh">Chattisgarh</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Goa">Goa</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="TamilNadu">TamilNadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="UttarPradesh">UttarPradesh</option>
+            <option value="Uttarakhand">Uttarakhand/option>
+            <option value="WestBengal">WestBengal</option>
+            <!-- Add more options for other states -->
+        </select>
+        <label>Do you have a lawn/garden?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="lawn" value="yes"> Yes</label>
+            <label><input type="radio" name="lawn" value="no"> No</label>
+        </div>
+        <label>Do you own a vehicle?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="vehicle" value="yes"> Yes</label>
+            <label><input type="radio" name="vehicle" value="no"> No</label>
+        </div>
+        <label for="mileage">How many miles do you drive per week?</label>
+        <input type="number" id="mileage" min="0" step="1" value="0">
+        <label>Do you recycle:</label>
+        <label>Plastic:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recyclePlastic" value="yes"> Yes</label>
+            <label><input type="radio" name="recyclePlastic" value="no"> No</label>
+        </div>
+        <label>Paper:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recyclePaper" value="yes"> Yes</label>
+            <label><input type="radio" name="recyclePaper" value="no"> No</label>
+        </div>
+        <label>Bottle Cans:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="recycleCans" value="yes"> Yes</label>
+            <label><input type="radio" name="recycleCans" value="no"> No</label>
+        </div>
+        <label>Do you donate clothes?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="donateClothes" value="yes"> Yes</label>
+            <label><input type="radio" name="donateClothes" value="no"> No</label>
+        </div>
+        <label>Do you consume coffee, tea, or green tea?</label>
+        <label>Coffee:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="coffee" value="yes"> Yes</label>
+            <label><input type="radio" name="coffee" value="no"> No</label>
+        </div>
+        <label>Tea:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="tea" value="yes"> Yes</label>
+            <label><input type="radio" name="tea" value="no"> No</label>
+        </div>
+        <label>Green Tea:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="greenTea" value="yes"> Yes</label>
+            <label><input type="radio" name="greenTea" value="no"> No</label>
+        </div>
+        <label for="annualIncome">Annual Income (part of total income):</label>
+        <input type="number" id="annualIncome" min="0" step="1" value="0">
+        <button onclick="calculate()">Calculate</button>
+
+        <div class="result" id="result"></div>
+
+
+
+        <div id="waterUsageChart"></div>
+        <div id="recommendations"></div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+       
+        
+        <div class="section_container">
+            <div class="footer_section">
+                <div class="footer_logo">
+                    <a href="new1landing.html">
+                        <h2>WaterFootprint</h2>
+                    </a>
+                </div>
+                <div class="useful_links">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="dasboard.html">Home</a></li>
+                        <li><a href="calculator.html">Calculator</a></li>
+                        <li><a href="moreinfo.html">More Info</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="contact_us">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="bx bx-location-plus"></i> WaterFootprint Organization</li>
+                        <li><i class="bx bx-envelope"></i> info@waterfootprint.com</li>
+                       
+                    </ul>
+                </div>
+                <div class="follow_us">
+                    <h3>Follow Us</h3>
+                    <i class="bx bxl-facebook-circle"></i>
+                    <i class="bx bxl-twitter"></i>
+                    <i class="bx bxl-instagram-alt"></i>
+                    <i class="bx bxl-linkedin"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script src="calculator.js"></script>
+</body>
+
+</html>

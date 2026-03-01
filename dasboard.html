@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterfootprint</title>
+    <link rel="stylesheet" href="styles.css">
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+           
+            background: black;
+
+        }
+
+       .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+button {
+    width: auto;
+    max-width: 90%;
+}
+       
+        /* Styling for the header section */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+            background: rgb(0, 145, 255);
+        }
+
+        nav {
+            display: flex;
+            padding: 15px 0 15px 20px;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            max-width: 1300px;
+        }
+
+        nav .nav_logo a {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav .nav_logo a img {
+            max-width: 55px;
+        }
+
+        nav .nav_logo h2 {
+            color: white;
+            font-weight: 600;
+            font-size: 32px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 25px;
+            font-size: 18px;
+            font-weight: 500;
+            color: white;
+            border-radius: 30px;
+            transition: all 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            color: rgb(73, 172, 234);
+            background-color: rgb(0, 217, 255);
+        }
+
+        nav label {
+            font-size: 32px;
+            color: var(--white-color);
+            cursor: pointer;
+        }
+
+        label .menu_btn,
+        label .close_btn {
+            display: none;
+        }
+
+        #click {
+            display: none;
+        }
+        @media screen and (max-width: 1024px) {
+    nav {
+        padding: 15px 20px;
+    }
+
+    label .menu_btn {
+        display: block;
+    }
+
+    nav ul {
+        display: block;
+        background: white;
+        position: absolute;
+        top: 75px;
+        left: -100%;
+        overflow-y: auto;
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: all 0.15s ease;
+    }
+
+    #click:checked~ul {
+        left: 0;
+    }
+
+    #click:checked~label .close_btn {
+        display: block;
+    }
+
+    #click:checked~label .menu_btn {
+        display: none;
+    }
+
+    nav ul li {
+        display: block;
+        padding: 8px 12px;
+        width: 48%;
+        margin: 24px auto;
+    }
+
+    nav ul li a {
+        color: black;
+    }
+    .footer_section {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer_section .useful_links {
+        text-align: start;
+    }
+}
+@media screen and (max-width: 576px) {
+    .section_title {
+        padding: 50px 0;
+    }
+
+    nav .nav_logo a img,
+    .footer_section .footer_logo a img {
+        max-width: 45px;
+    }
+
+    nav .nav_logo h2 {
+        font-size: 30px;
+    }
+
+}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--white-color);
+    overflow-x:hidden ;
+}
+
+/* Setting for the whole website */
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+        #hero {
+    background: url('water.jpg') no-repeat center center/cover;
+    color: #0f0f0f;
+    min-height: 100vh;
+    padding: 120px 20px 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+       #hero h2 {
+    font-size: clamp(28px, 5vw, 48px);
+}
+
+#hero p {
+    font-size: clamp(16px, 3vw, 24px);
+}
+
+        .btn {
+            display: inline-block;
+            color: #0a0909;
+            background: #26e714;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+        }
+
+        .container button {
+            display: inline-block;
+            color: #0a0909;
+            background: #26e714;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #7bee71
+        }
+
+
+        #features {
+            padding: 50px 0;
+            background: #f4f4f4;
+            text-align: center;
+        }
+
+        #features .feature {
+            width: 30%;
+            float: left;
+            margin: 0 1.5%;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+
+        #features .feature h3 {
+            margin-bottom: 20px;
+        }
+
+   #about {
+    padding: 60px 20px;
+    background: #fff;
+    text-align: center;
+}@media (max-width: 768px) {
+
+    nav {
+        padding: 15px;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    nav ul li a {
+        font-size: 18px;
+    }
+
+}.footer_section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .footer_section {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .follow_us {
+        margin-top: 20px;
+    }
+}
+        @media (max-width: 768px) {
+
+            #features .feature {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .content1 h2 {
+                font-size: 60px;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .content1 {
+                height: 200px;
+            }
+
+            #hero {
+                height: 400px;
+                padding-top: 100px;
+            }
+
+            #hero h2 {
+                font-size: 36px;
+            }
+
+            #hero p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content1 h2 {
+                font-size: 40px;
+            }
+
+            #hero h2 {
+                font-size: 24px;
+            }
+
+            #hero p {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+            }
+        }
+
+        .custom-shape-divider-bottom-1718692516 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .custom-shape-divider-bottom-1718692516 svg {
+            position: relative;
+            display: block;
+            width: calc(124% + 1.3px);
+            height: 177px;
+        }
+
+        .custom-shape-divider-bottom-1718692516 .shape-fill {
+            fill: #f6f6f7;
+        }
+
+        main {
+            background: linear-gradient(rgb(5, 91, 202), rgb(114, 188, 231));
+            background-image: url(https://images.wallpaperscraft.com/image/single/waves_water_surface_139154_1920x1080.jpg);
+        }
+
+        .container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 60px 20px;
+    gap: 40px;
+}
+            
+
+.container1 .drop {
+     position: relative;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1 / 1;
+    height: 350px;
+            background: #f0ecec;
+            box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05), 25px 35px 20px rgba(0, 0, 0, 0.05), 25px 30px 30px rgba(0, 0, 0, 0.05), inset -20px -20px 25px rgba(255, 255, 255, 0.9);
+}
+
+        
+
+        .container1 .drop:nth-child(1) {
+            border-radius: 57% 43% 43% 57% / 43% 43% 57% 57%;
+        }
+
+        .container1 .drop:nth-child(2) {
+            border-radius: 73% 27% 59% 41% / 57% 59% 41% 43%;
+        }
+
+        .container1 .drop:nth-child(3) {
+            border-radius: 35% 65% 31% 69% / 57% 59% 41% 43%;
+        }
+
+        .container1 .drop:hover {
+            border-radius: 50%;
+        }
+
+        .container1 .drop::before {
+            content: '';
+            position: absolute;
+            top: 90px;
+            left: 110px;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.9;
+        }
+
+        .container1 .drop .content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 18px;
+            gap: 13px;
+            color: black;
+        }
+
+        .container1 .drop .content h2 {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            background: #eff0f4;
+            border-radius: 50%;
+            box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1), inset -2px -5px 10px rgba(255, 255, 255, 1), 15px 15px 10px rgba(0, 0, 0, 0.05), 15px 10px 15px rgba(0, 0, 0, 0.025);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: var(--clr);
+        }
+
+
+        .container1 .drop .content button {
+            position: relative;
+            padding: 10px 25px;
+            background: var(--clr);
+            text-decoration: none;
+            color: #fff;
+            border-radius: 25px;
+            font-weight: 500;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+            opacity: 0.75;
+            transition: 0.5s;
+        }
+
+        .container1 .drop .content button:hover {
+            opacity: 1;
+        }
+
+        .container1 .drop .content button::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65%;
+            height: 5px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        
+        footer {
+            background: #0b62d4;
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .footer_section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer_section h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .footer_section .footer_logo a {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            color: var(--white-color);
+        }
+
+        .footer_section .footer_logo a img {
+            max-width: 55px;
+        }
+
+        .footer_section .footer_logo a h2 {
+            font-weight: 600;
+        }
+
+        .footer_section .useful_links ul li {
+            margin: 20px 0;
+        }
+
+        .footer_section .useful_links ul li a {
+            color: var(--white-color);
+            font-size: 17px;
+        }
+
+        .footer_section .useful_links ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .footer_section .contact_us ul li {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer_section .contact_us ul li i {
+            font-size: 25px;
+        }
+
+        .footer_section .contact_us ul li span {
+            font-size: 17px;
+        }
+
+        .footer_section .follow_us i {
+            font-size: 26px;
+            margin-right: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .footer_section .follow_us i:hover {
+            color: var(--secondary-color);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .info-box {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* menu btn styling */
+        .menu-btn {
+            color: #fff;
+            font-size: 23px;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media (max-width: 947px) {
+            .menu-btn {
+                display: block;
+                z-index: 999;
+            }
+        }
+        @media (max-width: 480px) {
+
+    .container1 {
+        gap: 30px;
+    }
+
+    .container1 .drop {
+        max-width: 280px;
+    }
+
+    #hero {
+        padding-top: 100px;
+    }
+
+    #hero h2 {
+        margin-bottom: 15px;
+    }
+
+    #hero button {
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+}
+    </style>
+</head>
+
+<body>
+ 
+
+
+    <!-- Header & Navbar Section -->
+    <header>
+        <nav>
+            <div class="nav_logo">
+                <a href="#">
+                    <!-- <img src="images/coffee_logo.png" alt="Coffee Logo" /> -->
+                    <h2>WaterFootprint</h2>
+                </a>
+            </div>
+
+            <input type="checkbox" id="click" />
+            <label for="click">
+                <i class="menu_btn bx bx-menu"></i>
+                <i class="close_btn bx bx-x"></i>
+            </label>
+
+            <ul>
+                <li><a href="dasboard.html">Home</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="moreinfo.html">More information</a></li>
+                <li><a href="#about">About</a></li>
+              
+                <li><a href="contact.html">Contact</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Track Your Water Usage</h2>
+                <p>Join the movement to conserve and protect our planet Earth</p>
+                <button onclick="location.href='calculator.html'">Calculate Your WaterFootprint</button>
+              
+                </button>
+            </div>
+            <div class="custom-shape-divider-bottom-1718692516">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path
+                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                        class="shape-fill"></path>
+                </svg>
+            </div>
+        </section>
+
+
+    </main>
+    <section id="features">
+        <div class="container1">
+            <div class="drop" style="--clr:#ff0f5b;">
+                <div class="content">
+                    <h2>01</h2>
+                    <p>What is WaterFootprint?</p>
+                    <p>Water footprint refers to the total volume of freshwater that is used directly or indirectly
+                        to produce goods and services consumed by an individual</p>
+                    <button onclick="location.href='moreinfo.html'">Read More
+                  
+                    </button>
+                </div>
+            </div>
+            <div class="drop" style="--clr:#be01fe;">
+                <div class="content">
+                    <h2>02</h2>
+                    <p>What are the components of WaterFootprint?</p>
+                    <p>Green Water Footprint</p>
+                    <p>Blue Water Footprint</p>
+                    <p>Grey Water Footprint </p>
+                    <button onclick="location.href='moreinfo.html'">Read More
+                   
+                    </button>
+                </div>
+            </div>
+            <div class="drop" style="--clr:#01b4ff;">
+                <div class="content">
+                    <h2>03</h2>
+                    <p>How to reduce WaterFootprint?</p>
+                    <p>Reduce, Reuse, Recycle</p>
+                    <p>Smart Consumption</p>
+                    <p>Sustainable Agriculture</p>
+                    <button onclick="location.href='moreinfo.html'">Read More
+                        <!-- <a href="#">Read More</a> -->
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Waterfootprint is dedicated to helping individuals and businesses reduce their water usage and contribute
+                to a more sustainable future.</p>
+            <p>Our mission is to raise awareness about the importance of water conservation and to empower individuals
+                and organizations to reduce their water footprint. We believe that by making small changes in our daily
+                lives, we can collectively make a significant impact on preserving our planet's most precious resource:
+                water.</p>
+        </div>
+    </section>
+
+
+    <footer>
+      
+       
+        <div class="section_container">
+            <div class="footer_section">
+                <div class="footer_logo">
+                    <a href="index.html">
+                        <!-- <img src="images/coffee_logo.png" alt="Coffee Logo" /> -->
+                        <h2>WaterFootprint</h2>
+                    </a>
+                </div>
+               <div class="useful_links">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="dasboard.html">Home</a></li>
+                        <li><a href="calculator.html">Calculator</a></li>
+                        <li><a href="moreinfo.html">More Info</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="contact_us">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="bx bx-location-plus"></i> WaterFootprint Organization</li>
+                        <li><i class="bx bx-envelope"></i> info@waterfootprint.com</li>
+                        
+                    </ul>
+                </div>
+                <div class="follow_us">
+                    <h3>Follow Us</h3>
+                    <i class="bx bxl-facebook-circle"></i>
+                    <i class="bx bxl-twitter"></i>
+                    <i class="bx bxl-instagram-alt"></i>
+                    <i class="bx bxl-linkedin"></i>
+                </div>
+            </div>
+            </div>
+        </div>
+    </footer>
+
+    
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

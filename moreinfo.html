@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <link rel="stylesheet" href="moreinfo.css">
+    
+</head>
+
+<body>
+    <canvas id="waterCanvas"></canvas>
+     <!-- Header & Navbar Section -->
+     <header>
+        <nav>
+            <div class="nav_logo">
+                <a href="#">
+                    <!-- <img src="images/coffee_logo.png" alt="Coffee Logo" /> -->
+                    <h2>WaterFootprint</h2>
+                </a>
+            </div>
+
+            <input type="checkbox" id="click" />
+            <label for="click">
+                <i class="menu_btn bx bx-menu">&#9776;</i>
+                <i class="close_btn bx bx-x">&#10005;</i>
+            </label>
+
+            <ul>
+                <li><a href="dasboard.html">Home</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="moreinfo.html">More information</a></li>
+               
+    
+                <li><a href="contact.html">Contact</a></li> 
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>What is WaterFootprint?</h1>
+        <p>Water footprint refers to the total volume of freshwater that is used directly or indirectly
+            to produce goods and services consumed by an individual. It encompasses all water usage, from direct
+            consumption (like drinking and bathing) to indirect consumption embedded in products and services (such as
+            the water used to grow food or manufacture goods). The concept was introduced by Arjen Y. Hoekstra in 2002
+            and has since become a crucial tool for water management. </p>
+        <div class="components">
+            <h1>Components of Water Footprint</h1>
+            <p>A water footprint is typically divided into three main components:</p>
+            <p id="main2">1. Blue Water Footprint: This represents the volume of surface and groundwater consumed during
+                production processes. For example, irrigation in agriculture or the water used in industrial processes
+                falls under this category.</p>
+            <p>
+                2. Green Water Footprint: This refers to the volume of rainwater consumed. It is particularly relevant in
+                agriculture, where crops rely on rainfall rather than irrigation.
+            </p>
+            <p>
+           3. Grey Water Footprint: This measures the volume of freshwater required to assimilate pollutants, ensuring
+            that water quality remains within acceptable standards. It is an indicator of water pollution associated
+            with production processes.</p>
+        </div>
+        <div class="significance"> 
+            <h1>Significance of Water Footprint</h1>
+            <p>Understanding water footprints is essential for several reasons:
+
+            </p>
+            <p>1. Resource Management: By analyzing water footprints, we can identify areas of high water consumption and
+                implement strategies to reduce usage and improve efficiency. This is crucial in regions facing water
+                scarcity. </p>
+
+                <p>
+                2. Environmental Impact: Water footprints help in assessing the environmental impact of our consumption
+                patterns. Reducing our water footprint can mitigate the adverse effects on ecosystems and biodiversity.
+            </p>
+                <p>
+                3. Sustainable Practices: Businesses can use water footprint data to adopt more sustainable practices, such
+                as optimizing water use in production processes or sourcing materials from regions with abundant water
+                supplies. </p>
+
+                <p>
+                4. Consumer Awareness: Educating consumers about their water footprint can lead to more informed choices,
+                encouraging the purchase of products with lower water footprints and supporting sustainable brands.</p>
+        </div>
+        <div class="reduce">
+            <h1>How to reduce WaterFootprint?</h1>
+            <p>Reducing water footprints requires a multifaceted approach:
+
+            </p>
+            <p>1. Efficient Water Use: Implementing water-saving technologies and practices in agriculture, industry, and
+                households can significantly reduce water consumption. </p>
+
+                <p>  2. Sustainable Agriculture: Adopting practices like rainwater harvesting, drip irrigation, and selecting
+                drought-resistant crops can lower the green and blue water footprints in agriculture. </p>
+
+                <p>  3. Pollution Control: Reducing the use of harmful chemicals and improving wastewater treatment processes
+                can decrease the grey water footprint. </p>
+
+                <p> 4. Policy and Regulation: Governments can play a pivotal role by enacting policies that promote water
+                conservation and sustainable water management practices.</p>
+        </div>
+    </main>
+
+    <footer>
+       
+        <div class="section_container">
+            <div class="footer_section">
+                <div class="footer_logo">
+                    <a href="new1landing.html">
+                        <h2>WaterFootprint</h2>
+                    </a>
+                </div>
+                <div class="useful_links">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="new1landing.html">Home</a></li>
+                        <li><a href="calculator.html">Calculator</a></li>
+                        <li><a href="moreinfo.html">More Info</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="contact_us">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="bx bx-location-plus"></i> WaterFootprint Organization</li>
+                        <li><i class="bx bx-envelope"></i> info@waterfootprint.com</li>
+                        <li><i class="bx bx-phone"></i> +1 234 567 890</li>
+                    </ul>
+                </div>
+                <div class="follow_us">
+                    <h3>Follow Us</h3>
+                    <i class="bx bxl-facebook-circle"></i>
+                    <i class="bx bxl-twitter"></i>
+                    <i class="bx bxl-instagram-alt"></i>
+                    <i class="bx bxl-linkedin"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+<script>
+const canvas = document.getElementById("waterCanvas");
+const ctx = canvas.getContext("2d");
+
+let width, height;
+let time = 0;
+
+function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+function drawWave(amplitude, wavelength, speed, offsetY, color, opacity) {
+    ctx.beginPath();
+    ctx.moveTo(0, height);
+
+    for (let x = 0; x <= width; x++) {
+        let y = amplitude * Math.sin((x / wavelength) + time * speed) + offsetY;
+        ctx.lineTo(x, y);
+    }
+
+    ctx.lineTo(width, height);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.globalAlpha = opacity;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+}
+
+function animate() {
+    time += 0.02;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Background gradient
+    let gradient = ctx.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, "#0077b6");
+    gradient.addColorStop(1, "#023e8a");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    // Layered waves (depth effect)
+    drawWave(20, 200, 1.2, height * 0.6, "#00b4d8", 0.6);
+    drawWave(30, 300, 0.8, height * 0.65, "#0096c7", 0.5);
+    drawWave(40, 400, 0.5, height * 0.7, "#0077b6", 0.4);
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</body>
+
+</html>
