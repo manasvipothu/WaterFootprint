@@ -22,6 +22,10 @@ Boxicons – Sleek icons for UI
 
 Glassmorphism – Modern design aesthetic
 
+🎯 Demo
+
+Check out the live demo here: 🌐 https://waterfootprint-beta.vercel.app/
+
 📄 License
 
 This project is licensed under MIT License – see LICENSE
