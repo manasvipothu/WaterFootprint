@@ -79,17 +79,14 @@
    </head>
 <body>
   <header>
-    <!-- <nav class="navbar">
-      <div class="logo"><a href="#">LOGO></a></div>
-      <ul class="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Latest</a></li>
-        <li><a href="#">Offers</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+    <nav class="navbar">
+      <div class="logo"><a href="#">WaterFootprint</a></div>
+      <ul class="menu" style="display: flex; list-style: none; gap: 20px;">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dasboard.html">Dashboard</a></li>
+        <li id="auth-nav"><a href="auth.html">Login</a></li>
       </ul>
-     
-    </nav> -->
+    </nav>
     <div class="page-content-wrapper" id="pageContentWrapper"></div>
     <!-- <h1 class="heading">E</h1> -->
     <h1 class="heading"><span>W</span><span>A</span><span>T</span><span>E</span><span>R</span></h1>
@@ -126,6 +123,19 @@
           button.classList.remove("animate");
         }, 600);
       });
+
+    // Firebase Auth State Handling
+    import { auth } from './firebase-config.js';
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    onAuthStateChanged(auth, (user) => {
+        const authNav = document.getElementById('auth-nav');
+        if (user) {
+            authNav.innerHTML = `<a href="profile.html">Profile</a>`;
+        } else {
+            authNav.innerHTML = `<a href="auth.html">Login</a>`;
+        }
+    });
 </script>
 </body>
 </html>
