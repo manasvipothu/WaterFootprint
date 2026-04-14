@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | WaterFootprint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0077b6;
+            --secondary-blue: #023e8a;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #03244d, #055c92, #59a5c6);
+            margin: 0;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Navigation Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgb(0, 145, 255);
+        }
+
+        nav {
+            display: flex;
+            padding: 15px 20px;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        nav .nav_logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        nav .nav_logo h2 {
+            color: white;
+            font-weight: 600;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Profile Content Container */
+        .profile-container {
+            max-width: 900px;
+            margin: 100px auto 40px;
+            padding: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* User Info Section */
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .user-details h1 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+        }
+
+        .user-details p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        /* History Section */
+        .history-section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .history-section h2 i {
+            color: #00b4d8;
+        }
+
+        .history-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .history-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .history-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .history-date {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .history-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #00b4d8;
+        }
+
+        .history-value span {
+            font-size: 14px;
+            color: white;
+            font-weight: 400;
+        }
+        
+        .history-details {
+            text-align: right;
+        }
+        
+        .history-details-btn {
+            background: none;
+            border: 1px solid #00b4d8;
+            color: #00b4d8;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .history-details-btn:hover {
+            background: #00b4d8;
+            color: white;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Buttons */
+        .btn-container {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #00b4d8;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0077b6;
+        }
+
+        .btn-danger {
+            background: transparent;
+            border: 1px solid #ff4d4d;
+            color: #ff4d4d;
+        }
+
+        .btn-danger:hover {
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        /* Loading Overlay */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 18, 25, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            color: white;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #00b4d8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1500;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid var(--glass-border);
+            width: 80%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: white;
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .breakdown-item {
+            background: rgba(0,0,0,0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Loading Profile...</p>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <nav>
+            <div class="nav_logo">
+                <a href="index.html">
+                    <h2>WaterFootprint</h2>
+                </a>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dasboard.html">Dashboard</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="profile.html" class="active">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="profile-container" id="profile-content" style="display: none;">
+        
+        <div class="user-header">
+            <div class="avatar" id="user-initial" style="position: relative; overflow: hidden; cursor: pointer;" title="Click to upload profile picture">
+                <i class='bx bx-user' id="default-icon"></i>
+                <img id="profile-img" style="display: none; width: 100%; height: 100%; object-fit: cover;" alt="Profile">
+                <div id="upload-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); color: white; font-size: 10px; text-align: center; padding: 2px; display: none;">Upload</div>
+            </div>
+            <input type="file" id="image-upload" accept="image/*" style="display: none;">
+            <div class="user-details">
+                <h1 id="user-name">User Name</h1>
+                <p id="user-email">user@example.com</p>
+                <p id="member-since" style="font-size: 12px; margin-top: 5px; color: #aaa;">Member since: Loading...</p>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h2><i class='bx bx-history'></i> Water Footprint History</h2>
+            
+            <div id="history-container" class="history-list">
+                <!-- Data will be populated here by JS -->
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn btn-primary" onclick="location.href='calculator.html'">
+                <i class='bx bx-calculator'></i> New Calculation
+            </button>
+            <button class="btn btn-danger" id="logout-btn">
+                <i class='bx bx-log-out'></i> Sign Out
+            </button>
+        </div>
+    </div>
+    
+    <!-- Breakdown Modal -->
+    <div id="breakdownModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 style="margin-top: 0;">Calculation Breakdown</h2>
+            <p id="modal-date" style="color: #aaa; font-size: 14px;"></p>
+            <h3 style="color: #00b4d8; margin: 15px 0;" id="modal-total"></h3>
+            
+            <div class="breakdown-grid" id="modal-grid">
+                <!-- details inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script tags remain at the bottom for better loading -->
+    <script type="module" src="profile.js?v=2"></script>
+</body>
+</html>
